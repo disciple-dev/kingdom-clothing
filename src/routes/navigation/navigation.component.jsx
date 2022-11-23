@@ -12,11 +12,13 @@ const Navigation = () => {
           <Logo className="logo" />
         </Link>
         <div className="links-container">
-          <Link className="nav-link" to="/shop">
+          {/* <Link className="nav-link" to="/shop">
             Shop
+          </Link> */}
+          {/* <Link className="nav-link">Contact</Link> */}
+          <Link className="nav-link" to="/auth/login">
+            Login
           </Link>
-          <Link className="nav-link">Contact</Link>
-          <Link className="nav-link">Sign In</Link>
           <Link className="nav-link">Cart</Link>
         </div>
       </nav>
