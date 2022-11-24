@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
-  //   signInWithRedirect,
   signInWithPopup,
 } from "firebase/auth";
 
@@ -17,32 +17,51 @@ const firebase = initializeApp({
   appId: "1:805273463769:web:1f0e63a53112bc8185c7c8",
 });
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const auth = getAuth(firebase);
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
-  const userDocumentReference = doc(db, "users", userAuth.uid);
-  console.info({ userDocumentReference });
+export const createAuthUserFromAuth = async (userAuth) => {
+  if (!userAuth) return;
+  const { displayName, email } = userAuth;
+
+  return await createFirebaseUserDocument(userAuth.uid, displayName, email);
+};
+
+async function createFirebaseUserDocument(id, name, email) {
+  if (!id || !name || !email) return Promise.reject("Missing param");
+  const userDocumentReference = doc(db, "users", id);
 
   const userSnapshot = await getDoc(userDocumentReference);
-  console.log({ userSnapshot });
 
   if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
+    const dt = new Date();
+    const createdAt = dt.toISOString();
+    const newUser = { displayName: name, email, createdAt };
 
-    const newUser = { displayName, email, createdAt: new Date() };
-
-    try {
-      await setDoc(userDocumentReference, newUser);
-    } catch (error) {
-      console.error("Created user failure: ", error);
-    }
+    return await setDoc(userDocumentReference, newUser);
   }
+}
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+
+  if (!userCredential) return;
+
+  const { user } = userCredential;
+
+  return await createFirebaseUserDocument(user.uid, email, password);
 };

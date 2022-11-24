@@ -1,0 +1,14 @@
+main {
+  display: flex;
+  flex-direction: row;
+
+  section {
+    width: 50%;
+  }
+
+  aside {
+    width: 50%;
+    background-color: lightgrey;
+    padding: 1rem;
+  }
+}
