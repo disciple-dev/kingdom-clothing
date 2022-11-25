@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
+  signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
 
@@ -28,13 +29,6 @@ export const signInWithGooglePopup = () =>
 
 export const db = getFirestore();
 
-export const createAuthUserFromAuth = async (userAuth) => {
-  if (!userAuth) return;
-  const { displayName, email } = userAuth;
-
-  return await createFirebaseUserDocument(userAuth.uid, displayName, email);
-};
-
 async function createFirebaseUserDocument(id, name, email) {
   if (!id || !name || !email) return Promise.reject("Missing param");
   const userDocumentReference = doc(db, "users", id);
@@ -50,7 +44,18 @@ async function createFirebaseUserDocument(id, name, email) {
   }
 }
 
-export const createAuthUserWithEmailAndPassword = async (email, password) => {
+export const createAuthUserFromAuth = async (userAuth) => {
+  if (!userAuth) return;
+  const { displayName, email } = userAuth;
+
+  return await createFirebaseUserDocument(userAuth.uid, displayName, email);
+};
+
+export const createAuthUserWithEmailAndPassword = async (
+  name,
+  email,
+  password
+) => {
   if (!email || !password) return;
 
   const userCredential = await createUserWithEmailAndPassword(
@@ -63,5 +68,11 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 
   const { user } = userCredential;
 
-  return await createFirebaseUserDocument(user.uid, email, password);
+  return await createFirebaseUserDocument(user.uid, name, email);
+};
+
+export const authenticateWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return signInWithEmailAndPassword(auth, email, password);
 };

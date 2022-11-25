@@ -2,7 +2,7 @@ import "./form-input.style.scss";
 
 const FormInput = ({ label, ...inputProps }) => {
   return (
-    <fieldset class="group">
+    <fieldset className="group">
       {label && <label>{label}</label>}
       <input {...inputProps} className="form-input" />
     </fieldset>

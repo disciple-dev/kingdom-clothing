@@ -24,11 +24,12 @@
   }
 
   &.google {
-    background-color: #4285f4;
-    color: white;
+    background-color: grey;
+    color: black;
 
     &:hover {
       background-color: #357ae8;
+      color: white;
       border: none;
     }
   }

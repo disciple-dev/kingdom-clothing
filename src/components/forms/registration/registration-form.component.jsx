@@ -1,8 +1,8 @@
 import "./registration-form.styles.scss";
 import { useState } from "react";
-import { createAuthUserWithEmailAndPassword } from "../../services/firebase";
-import Button from "../button/button.component";
-import FormInput from "../form-input/form-input.component";
+import { createAuthUserWithEmailAndPassword } from "../../../services/firebase";
+import Button from "../../button/button.component";
+import FormInput from "../../form-input/form-input.component";
 
 const initialFormState = {
   name: "",
@@ -32,10 +32,9 @@ const RegistrationForm = () => {
   const onFormSubmit = async (event) => {
     event.preventDefault();
     setDisabled(true);
-    const formData = new FormData(event.target);
-    const { email, password, confirmPassword } = Object.fromEntries(formData);
+    const { email, password, confirmPassword } = formFields;
     if (password !== confirmPassword) return alert("Passwords do not match.");
-    await createAuthUserWithEmailAndPassword(email, password)
+    await createAuthUserWithEmailAndPassword(name, email, password)
       .then(() => {
         resetFormData();
         setDisabled(false);
@@ -89,7 +88,7 @@ const RegistrationForm = () => {
             onChange={onFormInputChange}
             value={confirmPassword}
           />
-          <fieldset class="action-buttons">
+          <fieldset className="action-buttons">
             <Button label="Register" type="submit" />
             <Button
               label="Reset Form"
