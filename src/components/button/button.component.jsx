@@ -1,9 +1,9 @@
 import "./button.styles.scss";
 
-const Button = ({ label, template, ...props }) => {
+const Button = ({ label, template, children, ...props }) => {
   return (
     <button className={`btn${template ? ` ${template}` : ""}`} {...props}>
-      {label}
+      {children || label}
     </button>
   );
 };
