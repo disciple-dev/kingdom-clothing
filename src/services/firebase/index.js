@@ -5,6 +5,8 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut as signOutUser,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
@@ -40,6 +42,8 @@ async function createFirebaseUserDocument(id, name, email) {
     const createdAt = dt.toISOString();
     const newUser = { displayName: name, email, createdAt };
 
+    console.info("creating new user", newUser);
+
     return await setDoc(userDocumentReference, newUser);
   }
 }
@@ -67,12 +71,22 @@ export const createAuthUserWithEmailAndPassword = async (
   if (!userCredential) return;
 
   const { user } = userCredential;
+  await createFirebaseUserDocument(user.uid, name, email);
 
-  return await createFirebaseUserDocument(user.uid, name, email);
+  return user;
 };
 
 export const authenticateWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
-  return signInWithEmailAndPassword(auth, email, password);
+  const { user } = await signInWithEmailAndPassword(auth, email, password);
+  return user;
+};
+
+export const signOut = async () => {
+  return await signOutUser(auth);
+};
+
+export const onAuthStateChangedListener = (callback) => {
+  onAuthStateChanged(auth, callback);
 };

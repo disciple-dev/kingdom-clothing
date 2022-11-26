@@ -1,12 +1,16 @@
 import "./login-form.styles.scss";
+import { useState } from "react";
+
 import Button from "../../button/button.component";
 import FormInput from "../../form-input/form-input.component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+
 import {
   authenticateWithEmailAndPassword,
-  createAuthUserFromAuth,
   signInWithGooglePopup,
 } from "../../../services/firebase";
-import { useState } from "react";
 
 const initialFormState = {
   email: "",
@@ -38,31 +42,27 @@ const EmailLoginForm = () => {
     });
   };
 
+  const resetFormData = () => {
+    setFormFields(initialFormState);
+  };
+
   const onLoginFormSubmit = async (event) => {
     event.preventDefault();
     setFormDisabled(true);
 
     const { email, password } = formFields;
 
-    const authedUser = await authenticateWithEmailAndPassword(
-      email,
-      password
-    ).catch((err) => {
+    await authenticateWithEmailAndPassword(email, password).catch((err) => {
       const message = getErrorMessage(err.code);
       alert(message);
       console.error(err.code);
     });
-
+    resetFormData();
     setFormDisabled(false);
-
-    console.info({ authedUser });
   };
 
   const logGoogleUser = async () => {
-    await signInWithGooglePopup().then(async ({ user }) => {
-      const userDocumentReference = await createAuthUserFromAuth(user);
-      console.log(userDocumentReference);
-    });
+    await signInWithGooglePopup();
   };
 
   return (
@@ -87,13 +87,21 @@ const EmailLoginForm = () => {
           value={password}
         />
         <fieldset className="action-buttons">
-          <Button type="submit" label="Login" />
+          <Button type="submit" label="Login">
+            <span>
+              Login <FontAwesomeIcon icon={faArrowRightToBracket} />
+            </span>
+          </Button>
           <Button
             type="button"
             onClick={logGoogleUser}
             template="google"
             label="Sign in with Google"
-          />
+          >
+            <span>
+              Sign in with Google <FontAwesomeIcon icon={faGoogle} />
+            </span>
+          </Button>
         </fieldset>
       </fieldset>
     </form>
