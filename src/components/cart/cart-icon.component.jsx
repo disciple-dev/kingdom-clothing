@@ -5,14 +5,20 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
 
 const CartIcon = ({ onClick }) => {
-  const { isCartVisible, setIsCartVisible } = useContext(CartContext);
+  const { isCartVisible, setIsCartVisible, numerOfItemsInCart } =
+    useContext(CartContext);
 
   const toggleIsCartVisible = () => setIsCartVisible(!isCartVisible);
 
   return (
-    <div className="cart-icon-container" onClick={toggleIsCartVisible}>
+    <div
+      className="cart-icon-container fa-layers fa-fw"
+      onClick={toggleIsCartVisible}
+    >
       <FontAwesomeIcon icon={faCartShopping} className="shopping-icon" />
-      <span className="item-count"></span>
+      <span className="item-count fa-layers-text fa-inverse">
+        {numerOfItemsInCart}
+      </span>
     </div>
   );
 };
