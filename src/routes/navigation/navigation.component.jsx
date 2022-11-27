@@ -11,9 +11,13 @@ import {
   faArrowRightFromBracket,
   faArrowRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
+import CartIcon from "../../components/cart/cart-icon.component";
+import CartDropDown from "../../components/cart/cart-dropdown/cart-dropdown.component";
+import { CartContext } from "../../contexts/cart.context";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+  const { isCartVisible } = useContext(CartContext);
 
   const logout = async () => {
     await signOut();
@@ -39,8 +43,9 @@ const Navigation = () => {
               Logout <FontAwesomeIcon icon={faArrowRightFromBracket} />
             </Button>
           )}
-          <Link className="nav-link">Cart</Link>
+          <CartIcon />
         </div>
+        {isCartVisible && <CartDropDown />}
       </nav>
       <Outlet />
     </>

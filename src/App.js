@@ -4,7 +4,7 @@ import "./App.scss";
 import SignIn from "./routes/auth/sign-in/signin-page.component";
 import Navigation from "./routes/navigation/navigation.component";
 import Home from "./routes/home/home.component";
-import Shop from "./routes/shop/shop.component.page";
+import Shop from "./routes/shop/shop.page.component";
 import RegistrationPage from "./routes/auth/registration/registration-page.component";
 
 const App = () => {
