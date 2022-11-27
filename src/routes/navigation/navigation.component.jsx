@@ -26,9 +26,9 @@ const Navigation = () => {
           <Logo className="logo" />
         </Link>
         <div className="links-container">
-          {/* <Link className="nav-link" to="/shop">
+          <Link className="nav-link" to="/shop">
             Shop
-          </Link> */}
+          </Link>
           {/* <Link className="nav-link">Contact</Link> */}
           {!currentUser ? (
             <Link className="nav-link" to="/auth/login">

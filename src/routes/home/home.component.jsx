@@ -1,5 +1,5 @@
 import CategoryList from "../../components/categories-list/category-list.component";
-import categories from "../../components/categories-list/categories.json";
+import categories from "../../data/categories.json";
 
 const Home = () => {
   return <CategoryList categories={categories} />;

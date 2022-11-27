@@ -4,6 +4,7 @@ import "./App.scss";
 import SignIn from "./routes/auth/sign-in/signin-page.component";
 import Navigation from "./routes/navigation/navigation.component";
 import Home from "./routes/home/home.component";
+import Shop from "./routes/shop/shop.component.page";
 import RegistrationPage from "./routes/auth/registration/registration-page.component";
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
+          <Route path="shop" element={<Shop />} />
           <Route path="auth">
             <Route path="login" element={<SignIn />} />
             <Route path="register" element={<RegistrationPage />} />
