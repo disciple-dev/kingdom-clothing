@@ -6,6 +6,7 @@ import Navigation from "./routes/navigation/navigation.component";
 import Home from "./routes/home/home.component";
 import Shop from "./routes/shop/shop.page.component";
 import RegistrationPage from "./routes/auth/registration/registration-page.component";
+import CheckoutPage from "./components/checkout/checkout.page.component";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="login" element={<SignIn />} />
             <Route path="register" element={<RegistrationPage />} />
           </Route>
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Route>
       </Routes>
     </Router>

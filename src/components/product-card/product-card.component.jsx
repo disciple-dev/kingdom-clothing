@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
       <img src={imageUrl} alt={name} />
       <div className="footer">
         <h3 className="name">{name}</h3>
-        <h4 className="price">{price}</h4>
+        <h4 className="price">${price}</h4>
       </div>
       <Button
         template="inverted"
