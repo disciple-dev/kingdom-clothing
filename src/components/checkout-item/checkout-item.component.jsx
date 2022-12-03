@@ -1,5 +1,10 @@
-import "./checkout-item.styles.scss";
-import Button from "../button/button.component";
+import {
+  CheckoutItemRow,
+  Column,
+  ImageContainer,
+  QuantityColumn,
+} from "./checkout-item.styles";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
@@ -16,12 +21,12 @@ const CheckoutItem = ({ cartItem }) => {
     useContext(CartContext);
 
   return (
-    <li className="checkout-item-row">
-      <div className="image-container">
+    <CheckoutItemRow>
+      <ImageContainer>
         <img src={imageUrl} alt={name} />
-      </div>
-      <span className="name">{name}</span>
-      <span className="quantity">
+      </ImageContainer>
+      <Column>{name}</Column>
+      <QuantityColumn>
         <FontAwesomeIcon
           icon={faChevronLeft}
           className="arrow"
@@ -33,12 +38,15 @@ const CheckoutItem = ({ cartItem }) => {
           icon={faChevronRight}
           onClick={() => addItemToCart(cartItem)}
         />
-      </span>
-      <span className="price">${price}</span>
-      <Button template="link" onClick={() => removeProductFromCart(cartItem)}>
+      </QuantityColumn>
+      <Column>${price}</Column>
+      <Button
+        template={BUTTON_TYPE_CLASSES.link}
+        onClick={() => removeProductFromCart(cartItem)}
+      >
         <FontAwesomeIcon icon={faTimes} />
       </Button>
-    </li>
+    </CheckoutItemRow>
   );
 };
 

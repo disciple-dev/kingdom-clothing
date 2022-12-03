@@ -1,4 +1,4 @@
-import "./cart-dropdown.styles.scss";
+import { CartItems, CartDropdownContainer } from "./cart-dropdown.styles";
 import { useContext } from "react";
 import { CartContext } from "../../../contexts/cart.context";
 import Button from "../../button/button.component";
@@ -11,16 +11,16 @@ const CartDropDown = () => {
     setIsCartVisible(false);
   };
   return (
-    <aside className="cart-dropdown-container">
-      <div className="cart-items">
+    <CartDropdownContainer>
+      <CartItems>
         {cartItems?.length
           ? cartItems.map((item) => <CartItem cartItem={item} key={item.id} />)
           : "Cart is empty."}
-      </div>
+      </CartItems>
       <Link to="/checkout" onClick={() => hideCartDropdown()}>
         <Button>Go to checkout</Button>
       </Link>
-    </aside>
+    </CartDropdownContainer>
   );
 };
 

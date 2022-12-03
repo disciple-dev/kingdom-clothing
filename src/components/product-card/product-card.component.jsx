@@ -1,8 +1,13 @@
-// import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
-import Button from "../button/button.component";
-import "./product-card.styles.scss";
+import { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import {
+  AddToCartButton,
+  ProductCardContainer,
+  ProductCardFooter,
+  ProductPrice,
+  ProductTitle,
+} from "./product-card.styles";
 
 const ProductCard = ({ product }) => {
   const { name, imageUrl, price } = product;
@@ -12,18 +17,18 @@ const ProductCard = ({ product }) => {
   const addToCart = (product) => addItemToCart(product);
 
   return (
-    <section className="product-card-container">
+    <ProductCardContainer>
       <img src={imageUrl} alt={name} />
-      <div className="footer">
-        <h3 className="name">{name}</h3>
-        <h4 className="price">${price}</h4>
-      </div>
-      <Button
-        template="inverted"
+      <ProductCardFooter>
+        <ProductTitle>{name}</ProductTitle>
+        <ProductPrice>${price}</ProductPrice>
+      </ProductCardFooter>
+      <AddToCartButton
+        template={BUTTON_TYPE_CLASSES.inverted}
         label="Add to Cart"
         onClick={() => addToCart(product)}
       />
-    </section>
+    </ProductCardContainer>
   );
 };
 

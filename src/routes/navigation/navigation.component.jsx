@@ -1,9 +1,14 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
 import { signOut } from "../../services/firebase";
 
-import "./navigation.styles.scss";
+import {
+  NavigationContainer,
+  LogoContainer,
+  NavLinks,
+  NavLink,
+} from "./navigation.styles";
 import { ReactComponent as Logo } from "../../assets/images/crown.svg";
 import Button from "../../components/button/button.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,28 +30,27 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className="navigation">
-        <Link to="/" className="logo-container">
+      <NavigationContainer>
+        <LogoContainer to="/" className="logo-container">
           <Logo className="logo" />
-        </Link>
-        <div className="links-container">
-          <Link className="nav-link" to="/shop">
+        </LogoContainer>
+        <NavLinks>
+          <NavLink className="nav-link" to="/shop">
             Shop
-          </Link>
-          {/* <Link className="nav-link">Contact</Link> */}
+          </NavLink>
           {!currentUser ? (
-            <Link className="nav-link" to="/auth/login">
+            <NavLink className="nav-link" to="/auth/login">
               Login <FontAwesomeIcon icon={faArrowRightToBracket} />
-            </Link>
+            </NavLink>
           ) : (
             <Button onClick={() => logout()} label="Logout" template="link">
               Logout <FontAwesomeIcon icon={faArrowRightFromBracket} />
             </Button>
           )}
           <CartIcon />
-        </div>
+        </NavLinks>
         {isCartVisible && <CartDropDown />}
-      </nav>
+      </NavigationContainer>
       <Outlet />
     </>
   );

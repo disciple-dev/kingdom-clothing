@@ -1,7 +1,7 @@
-import "./login-form.styles.scss";
 import { useState } from "react";
+import { ActionButtons } from "./login-form.styles";
 
-import Button from "../../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../../button/button.component";
 import FormInput from "../../form-input/form-input.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
@@ -86,7 +86,7 @@ const EmailLoginForm = () => {
           onChange={onFormInputChange}
           value={password}
         />
-        <fieldset className="action-buttons">
+        <ActionButtons>
           <Button type="submit" label="Login">
             <span>
               Login <FontAwesomeIcon icon={faArrowRightToBracket} />
@@ -95,14 +95,14 @@ const EmailLoginForm = () => {
           <Button
             type="button"
             onClick={logGoogleUser}
-            template="google"
+            template={BUTTON_TYPE_CLASSES.google}
             label="Sign in with Google"
           >
             <span>
               Sign in with Google <FontAwesomeIcon icon={faGoogle} />
             </span>
           </Button>
-        </fieldset>
+        </ActionButtons>
       </fieldset>
     </form>
   );

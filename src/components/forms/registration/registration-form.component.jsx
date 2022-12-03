@@ -1,4 +1,4 @@
-import "./registration-form.styles.scss";
+import { ActionButtons } from "./registration-form.styles";
 import { useState } from "react";
 import { createAuthUserWithEmailAndPassword } from "../../../services/firebase";
 import Button from "../../button/button.component";
@@ -88,14 +88,14 @@ const RegistrationForm = () => {
             onChange={onFormInputChange}
             value={confirmPassword}
           />
-          <fieldset className="action-buttons">
+          <ActionButtons>
             <Button label="Register" type="submit" />
             <Button
               label="Reset Form"
               template="inverted"
               onClick={resetFormData}
             />
-          </fieldset>
+          </ActionButtons>
         </fieldset>
       </form>
     </>

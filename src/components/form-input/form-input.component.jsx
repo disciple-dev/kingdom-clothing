@@ -1,11 +1,11 @@
-import "./form-input.style.scss";
+import { FieldSet, Input, Label } from "./form-input.style";
 
 const FormInput = ({ label, ...inputProps }) => {
   return (
-    <fieldset className="group">
-      {label && <label>{label}</label>}
-      <input {...inputProps} className="form-input" />
-    </fieldset>
+    <FieldSet>
+      {label && <Label>{label}</Label>}
+      <Input {...inputProps} />
+    </FieldSet>
   );
 };
 

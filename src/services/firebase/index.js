@@ -9,7 +9,16 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  query,
+  setDoc,
+  writeBatch,
+} from "firebase/firestore";
 
 const firebase = initializeApp({
   apiKey: "AIzaSyD4_o3gAo7vMSF90W-bKeK2meZaW4ncr3U",
@@ -30,6 +39,41 @@ export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 
 export const db = getFirestore();
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  documentsToAdd
+) => {
+  const collectionReference = collection(db, collectionKey);
+
+  const batch = writeBatch(db);
+
+  documentsToAdd.forEach((document) => {
+    const documentReference = doc(
+      collectionReference,
+      document.title.toLowerCase()
+    );
+
+    batch.set(documentReference, document);
+  });
+  await batch.commit();
+  console.info("done!");
+};
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionReference = collection(db, "categories");
+
+  const q = query(collectionReference);
+
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.reduce((list, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    list[title.toLowerCase()] = items;
+    return list;
+  }, {});
+
+  // return categories;
+};
 
 async function createFirebaseUserDocument(id, name, email) {
   if (!id || !name || !email) return Promise.reject("Missing param");
