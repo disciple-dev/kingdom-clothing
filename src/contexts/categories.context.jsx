@@ -11,7 +11,6 @@ export const CategoriesProvider = ({ children }) => {
   useEffect(() => {
     const getCategories = async () => {
       const categories = await getCategoriesAndDocuments();
-      console.log(categories);
       setCategories(categories);
     };
     getCategories();
