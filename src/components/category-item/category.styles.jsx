@@ -1,6 +1,14 @@
 import styled from "styled-components";
 import Button from "../button/button.component";
 
+export const BackgroundImage = styled.div`
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-image: url(${({ url }) => url});
+`;
+
 export const CategoryContainer = styled.div`
   min-width: 30%;
   height: 240px;
@@ -15,9 +23,11 @@ export const CategoryContainer = styled.div`
   &:hover {
     cursor: pointer;
 
-    & .background-image {
-      transform: scale(1.1);
-      transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+    ${BackgroundImage} {
+      @media screen and (prefers-reduced-motion: no-preference) {
+        transform: scale(1.1);
+        transition: transform 3s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+      }
     }
 
     & .category-body-container {
@@ -35,13 +45,6 @@ export const CategoryContainer = styled.div`
 
   &:last-child {
     margin-left: 7.5px;
-  }
-
-  .background-image {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
   }
 `;
 

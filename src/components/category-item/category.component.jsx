@@ -1,4 +1,5 @@
 import {
+  BackgroundImage,
   CategoryBodyContainer,
   CategoryContainer,
   CategoryTitle,
@@ -10,12 +11,7 @@ const CategoryItem = ({ category }) => {
   const { title, imageUrl } = category;
   return (
     <CategoryContainer>
-      <div
-        className="background-image"
-        style={{
-          backgroundImage: `url(${imageUrl})`,
-        }}
-      />
+      <BackgroundImage url={imageUrl} />
       <CategoryBodyContainer>
         <CategoryTitle>{title}</CategoryTitle>
         <ShopNowButton template={BUTTON_TYPE_CLASSES.link}>

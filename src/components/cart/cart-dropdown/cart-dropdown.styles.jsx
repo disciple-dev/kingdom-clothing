@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const CartDropdownContainer = styled.aside`
   position: absolute;
@@ -19,4 +20,18 @@ export const CartItems = styled.div`
   display: flex;
   flex-direction: column;
   overflow: scroll;
+`;
+
+export const EmptyCart = styled.span`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.75rem;
+  flex-direction: column;
+
+  svg {
+    padding: 2rem;
+  }
 `;
