@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.scss";
-import SignIn from "./routes/auth/sign-in/signin-page.component";
-import Navigation from "./routes/navigation/navigation.component";
-import Home from "./routes/home/home.component";
+import SignIn from "./routes/auth/sign-in/signin.page.component";
+import Navigation from "./components/navigation/navigation.component";
+import Home from "./routes/home/home.page.component";
 import Shop from "./routes/shop/shop.page.component";
-import RegistrationPage from "./routes/auth/registration/registration-page.component";
+import RegistrationPage from "./routes/auth/registration/registration.page.component";
 import CheckoutPage from "./components/checkout/checkout.page.component";
 
 const App = () => {

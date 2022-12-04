@@ -2,7 +2,7 @@ import {
   SigninPageContainer,
   LoginFormSection,
   RegistrationCallout,
-} from "./signin-page.styles";
+} from "./signin.page.styles";
 import { Link } from "react-router-dom";
 import Button from "../../../components/button/button.component";
 import LoginForm from "../../../components/forms/login/login-form.component";

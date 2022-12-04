@@ -10,14 +10,14 @@ import {
   NavLink,
 } from "./navigation.styles";
 import { ReactComponent as Logo } from "../../assets/images/crown.svg";
-import Button from "../../components/button/button.component";
+import Button from "../button/button.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightFromBracket,
   faArrowRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
-import CartIcon from "../../components/cart/cart-icon.component";
-import CartDropDown from "../../components/cart/cart-dropdown/cart-dropdown.component";
+import CartIcon from "../cart/cart-icon.component";
+import CartDropDown from "../cart/cart-dropdown/cart-dropdown.component";
 import { CartContext } from "../../contexts/cart.context";
 
 const Navigation = () => {
