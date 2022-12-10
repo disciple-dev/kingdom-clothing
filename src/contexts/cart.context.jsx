@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useReducer } from "react";
+import { createAction } from "../services/reducer/reducer.utils";
 
 export const CartContext = createContext({
   isCartVisible: false,
@@ -10,6 +11,37 @@ export const CartContext = createContext({
   removeItemFromCart: () => {},
   removeProductFromCart: () => {},
 });
+
+const INIITAL_STATE = {
+  isCartVisible: false,
+  cartItems: [],
+  numerOfItemsInCart: 0,
+  cartTotal: 0,
+};
+
+export const CartActionTypes = {
+  UPDATE_CART_ITEMS: "UPDATE_CART_ITEMS",
+  SET_IS_CART_VISIBLE: "SET_IS_CART_VISIBLE",
+};
+
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case CartActionTypes.UPDATE_CART_ITEMS:
+      return {
+        ...state,
+        ...payload,
+      };
+    case CartActionTypes.SET_IS_CART_VISIBLE:
+      return {
+        ...state,
+        isCartVisible: payload,
+      };
+    default:
+      throw new Error(`Invalid action: ${action}`);
+  }
+};
 
 const addToCart = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(
@@ -52,26 +84,40 @@ const calculateCartTotal = (cartItems) => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [isCartVisible, setIsCartVisible] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [numerOfItemsInCart, setNumerOfItemsInCart] = useState(0);
-  const [cartTotal, setCartTotal] = useState(0);
+  const [
+    { isCartVisible, cartItems, numerOfItemsInCart, cartTotal },
+    dispatch,
+  ] = useReducer(cartReducer, INIITAL_STATE);
 
-  useEffect(() => {
-    setNumerOfItemsInCart(getNumberOfCartItems(cartItems));
-  }, [cartItems]);
+  const updateCartItemsReducer = (cartItems) => {
+    const numerOfItemsInCart = getNumberOfCartItems(cartItems);
+    const cartTotal = calculateCartTotal(cartItems);
+    dispatch(
+      createAction(CartActionTypes.UPDATE_CART_ITEMS, {
+        cartItems,
+        numerOfItemsInCart,
+        cartTotal,
+      })
+    );
+  };
 
-  useEffect(() => {
-    setCartTotal(calculateCartTotal(cartItems));
-  }, [cartItems]);
+  const addItemToCart = (item) => {
+    const updatedCartItems = addToCart(cartItems, item);
+    updateCartItemsReducer(updatedCartItems);
+  };
 
-  const addItemToCart = (item) => setCartItems(addToCart(cartItems, item));
+  const removeItemFromCart = (item) => {
+    const updatedCartItems = updateItemQuantity(cartItems, item, -1);
+    updateCartItemsReducer(updatedCartItems);
+  };
 
-  const removeItemFromCart = (item) =>
-    setCartItems(updateItemQuantity(cartItems, item, -1));
+  const removeProductFromCart = (item) => {
+    const updatedCartItems = removeProduct(cartItems, item);
+    updateCartItemsReducer(updatedCartItems);
+  };
 
-  const removeProductFromCart = (item) =>
-    setCartItems(removeProduct(cartItems, item));
+  const setIsCartVisible = (open = !isCartVisible) =>
+    dispatch(createAction(CartActionTypes.SET_IS_CART_VISIBLE, open));
 
   const contextValue = {
     addItemToCart,
