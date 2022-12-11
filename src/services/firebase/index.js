@@ -66,13 +66,7 @@ export const getCategoriesAndDocuments = async () => {
   const q = query(collectionReference);
 
   const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.reduce((list, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    list[title.toLowerCase()] = items;
-    return list;
-  }, {});
-
-  // return categories;
+  return querySnapshot.docs.map((snapshot) => snapshot.data());
 };
 
 async function createFirebaseUserDocument(id, name, email) {

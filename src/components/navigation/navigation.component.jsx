@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../../contexts/user.context";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selectors";
+// import { UserContext } from "../../contexts/user.context";
 import { signOut } from "../../services/firebase";
 
 import {
@@ -21,7 +23,7 @@ import CartDropDown from "../cart/cart-dropdown/cart-dropdown.component";
 import { CartContext } from "../../contexts/cart.context";
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
   const { isCartVisible } = useContext(CartContext);
 
   const logout = async () => {
