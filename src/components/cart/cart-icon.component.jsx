@@ -4,14 +4,19 @@ import {
   ItemCount,
 } from "./cart-icon.styles.jsx";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCartCount,
+  selectIsCartVisible,
+} from "../../store/cart/cart.selectors.js";
+import { setCartIsVisible } from "../../store/cart/cart.actions.js";
 
 const CartIcon = ({ onClick }) => {
-  const { isCartVisible, setIsCartVisible, numerOfItemsInCart } =
-    useContext(CartContext);
+  const dispatch = useDispatch();
+  const isCartVisible = useSelector(selectIsCartVisible);
+  const numerOfItemsInCart = useSelector(selectCartCount);
 
-  const toggleIsCartVisible = () => setIsCartVisible(!isCartVisible);
+  const toggleIsCartVisible = () => dispatch(setCartIsVisible(!isCartVisible));
 
   return (
     <CartItemContainer

@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selectors";
 // import { UserContext } from "../../contexts/user.context";
@@ -20,11 +19,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CartIcon from "../cart/cart-icon.component";
 import CartDropDown from "../cart/cart-dropdown/cart-dropdown.component";
-import { CartContext } from "../../contexts/cart.context";
+import { selectIsCartVisible } from "../../store/cart/cart.selectors";
 
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
-  const { isCartVisible } = useContext(CartContext);
+  const isCartVisible = useSelector(selectIsCartVisible);
 
   const logout = async () => {
     await signOut();

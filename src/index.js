@@ -6,7 +6,6 @@ import App from "./App";
 
 import configureAppStore from "./store/configureStore";
 import reportWebVitals from "./reportWebVitals";
-import { CartProvider } from "./contexts/cart.context";
 
 const store = configureAppStore();
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -14,9 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <CartProvider>
-        <App />
-      </CartProvider>
+      <App />
     </Provider>
   </React.StrictMode>
 );

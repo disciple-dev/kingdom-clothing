@@ -3,18 +3,20 @@ import {
   CartDropdownContainer,
   EmptyCart,
 } from "./cart-dropdown.styles";
-import { useContext } from "react";
-import { CartContext } from "../../../contexts/cart.context";
 import Button from "../../button/button.component";
 import CartItem from "../cart-item/cart-item.component";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceSadTear } from "@fortawesome/free-regular-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems } from "../../../store/cart/cart.selectors";
+import { setCartIsVisible } from "../../../store/cart/cart.actions";
 
 const CartDropDown = () => {
-  const { cartItems, setIsCartVisible } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
   const hideCartDropdown = () => {
-    setIsCartVisible(false);
+    dispatch(setCartIsVisible(false));
   };
   return (
     <CartDropdownContainer>
