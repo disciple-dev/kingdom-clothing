@@ -8,10 +8,15 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ProductCard from "../../../components/product-card/product-card.component";
 import { useSelector } from "react-redux";
-import { getCategories } from "../../../store/categories/categories.selectors";
+import {
+  getCategories,
+  selectIsCategoriesLoading,
+} from "../../../store/categories/categories.selectors";
+import { Spinner } from "../../../components/spinner/spinner.component";
 
 const CategoryPage = () => {
   const { category } = useParams();
+  const isLoading = useSelector(selectIsCategoriesLoading);
   const categories = useSelector(getCategories);
   const [products, setProducts] = useState(categories[category]);
 
@@ -23,12 +28,16 @@ const CategoryPage = () => {
     <PageContainer>
       <section>
         <CategoryTitle>{category}</CategoryTitle>
-        <CategoryContainer>
-          {products &&
-            products.map((product) => {
-              return <ProductCard product={product} key={product.id} />;
-            })}
-        </CategoryContainer>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <CategoryContainer>
+            {products &&
+              products.map((product) => {
+                return <ProductCard product={product} key={product.id} />;
+              })}
+          </CategoryContainer>
+        )}
       </section>
     </PageContainer>
   );
