@@ -2,6 +2,7 @@ import {
   BaseButton,
   ButtonGoogle,
   ButtonInverted,
+  ButtonSpinner,
   LinkButton,
 } from "./button.styles.jsx";
 
@@ -20,9 +21,13 @@ const getButton = (template = BUTTON_TYPE_CLASSES.base) =>
     [BUTTON_TYPE_CLASSES.link]: LinkButton,
   }[template]);
 
-const Button = ({ label, template, children, ...props }) => {
+const Button = ({ label, template, isLoading, children, ...props }) => {
   const SelectedButton = getButton(template);
-  return <SelectedButton {...props}>{children || label}</SelectedButton>;
+  return (
+    <SelectedButton {...props} disabled={isLoading}>
+      {isLoading ? <ButtonSpinner /> : children || label }
+    </SelectedButton>
+  );
 };
 
 export default Button;
