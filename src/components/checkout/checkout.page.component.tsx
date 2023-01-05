@@ -21,11 +21,19 @@ const CheckoutPage = () => {
     <CheckoutPageMain>
       <Title>Checkout</Title>
       <CheckoutItemsListHeader>
-        <span>Product</span>
-        <span>Description</span>
-        <span>Quantity</span>
-        <span>Price</span>
-        <span>Remove</span>
+        <div style={{ width: "135px" }}>Product</div>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-around",
+          }}
+        >
+          <span>Description</span>
+          <span>Price</span>
+          <span>Quantity</span>
+        </div>
+        <span style={{ width: "40px" }}>Remove</span>
       </CheckoutItemsListHeader>
       <CheckoutItemsList>
         {cartItems.map((cartItem) => {

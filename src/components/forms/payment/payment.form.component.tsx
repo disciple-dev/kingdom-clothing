@@ -67,13 +67,22 @@ const PaymentForm = () => {
     }
   };
 
+  const CardElementStyleOptions = {
+    style: {
+      base: {
+        fontSize: "16px",
+      },
+    },
+  };
+
   return (
     <PaymentFormContainer>
       <h2>Pay With Stripe</h2>
       <FormContainer onSubmit={paymentHandler}>
-        <CardElement />
+        <CardElement options={CardElementStyleOptions} />
         <PaymentButton
           template={BUTTON_TYPE_CLASSES.base}
+          style={{ width: "100%" }}
           label="Pay Now"
           isLoading={isPaymentProcessing}
         />

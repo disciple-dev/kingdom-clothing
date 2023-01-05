@@ -6,12 +6,10 @@ import CategoriesPreview from "../../components/categories-preview/categories-pr
 import CategoryPage from "./category-page/category.page.component";
 
 const Shop = () => {
-  // const dispatch = useDispatch();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     fetchCategoriesAsync(dispatch);
-    // dispatch(fetchCategoriesAsync(dispatch));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

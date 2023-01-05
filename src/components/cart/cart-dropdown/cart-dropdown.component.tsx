@@ -2,8 +2,8 @@ import {
   CartItems,
   CartDropdownContainer,
   EmptyCart,
+  GoToCheckoutButton,
 } from "./cart-dropdown.styles";
-import Button from "../../button/button.component";
 import CartItem from "../cart-item/cart-item.component";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,7 +31,7 @@ const CartDropDown = () => {
         )}
       </CartItems>
       <Link to="/checkout" onClick={() => hideCartDropdown()}>
-        <Button>Go to checkout</Button>
+        <GoToCheckoutButton>Go to checkout</GoToCheckoutButton>
       </Link>
     </CartDropdownContainer>
   );

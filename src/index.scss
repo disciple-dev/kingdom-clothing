@@ -12,9 +12,13 @@ body {
   font-family: "Source Sans Pro", -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  max-width: 100vw;
   padding: 20px 40px;
 
-  @media only screen and (max-width: 800px){
+  @media only screen and (max-width: 800px) {
     padding: 0 0.5rem;
   }
 }

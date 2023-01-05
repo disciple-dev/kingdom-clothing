@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../../button/button.component";
 
 export const CartDropdownContainer = styled.aside`
   position: absolute;
@@ -33,4 +34,8 @@ export const EmptyCart = styled.span`
   svg {
     padding: 2rem;
   }
+`;
+
+export const GoToCheckoutButton = styled(Button)`
+  width: 100%;
 `;

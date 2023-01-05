@@ -5,7 +5,7 @@ export const ProductCardContainer = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: max(350px, 25vh);
   align-items: center;
   position: relative;
 
@@ -15,25 +15,32 @@ export const ProductCardContainer = styled.section`
     object-fit: cover;
     margin-bottom: 5px;
     opacity: 0.8;
+    @media only screen and (max-width: 800px) {
+      opacity: 1;
+      height: 90%;
+    }
   }
   &:hover {
     img {
-    opacity: 1;
+      opacity: 1;
+    }
   }
-  
+
   button {
-  opacity: 1;
-  display: flex;
+    opacity: 1;
+    display: flex;
   }
 `;
 
 export const AddToCartButton = styled(Button)`
   width: 80%;
-  opacity: 0.7;
   position: absolute;
+  z-index: 200;
   top: 255px;
-  display: none;
   opacity: 0.8;
+  @media only screen and (max-width: 800px) {
+    opacity: 1;
+  }
 `;
 
 export const ProductCardFooter = styled.div`
@@ -42,6 +49,18 @@ export const ProductCardFooter = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+
+  @media only screen and (max-width: 800px) {
+    position: absolute;
+    top: 0;
+    height: 4rem;
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: rgb(230, 230, 230);
+    font-size: 1rem;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 
   .name {
   }
@@ -52,10 +71,10 @@ export const ProductCardFooter = styled.div`
 `;
 
 export const ProductTitle = styled.h3`
-  width: 90%;
-  margin-bottom: 15px;
+  margin: 0;
 `;
 
 export const ProductPrice = styled.h4`
-  width: 10%;
+  /* width: 10%; */
+  margin: 0;
 `;

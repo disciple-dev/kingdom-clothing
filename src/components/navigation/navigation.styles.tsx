@@ -6,7 +6,9 @@ export const NavigationContainer = styled.nav`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  @media only screen and (min-width: 801px) {
+    margin-bottom: 25px;
+  }
 `;
 
 export const LogoContainer = styled(Link)`

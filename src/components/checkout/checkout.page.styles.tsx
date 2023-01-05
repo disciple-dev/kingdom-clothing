@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
 export const CheckoutPageMain = styled.main`
-  width: 55%;
+  width: 100%;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px auto 0;
+  margin: 0 auto;
+
+  @media only screen and (min-width: 801px) {
+    width: 800px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -20,12 +24,19 @@ export const CheckoutItemsListHeader = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid darkgrey;
 
-  span {
+  @media only screen and (max-width: 800px) {
+    display: none;
+  }
+
+  div {
     text-transform: capitalize;
-    width: 23%;
+    &:first-child {
+      width: 100px;
+      padding-right: 15px;
+    }
 
     &:last-child {
-      width: 8%;
+      text-align: right;
     }
   }
 `;
@@ -36,8 +47,7 @@ export const CheckoutItemsList = styled.ul`
 `;
 
 export const CheckoutTotal = styled.h2`
-  margin-top: 30px;
-  margin-left: auto;
+  margin: 30px 1em 0 auto;
   font-size: 2rem;
   position: sticky;
 `;

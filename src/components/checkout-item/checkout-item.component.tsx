@@ -1,11 +1,14 @@
 import {
   CheckoutItemRow,
-  Column,
+  DetailsContainer,
   ImageContainer,
+  Name,
   QuantityColumn,
+  QuantityControl,
+  RemoveProductButton,
+  FAIcon,
 } from "./checkout-item.styles";
-import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import {
   faChevronLeft,
   faChevronRight,
@@ -34,27 +37,29 @@ const CheckoutItem = ({ cartItem }: CheckoutItemPropse) => {
       <ImageContainer>
         <img src={imageUrl} alt={name} />
       </ImageContainer>
-      <Column>{name}</Column>
-      <QuantityColumn>
-        <FontAwesomeIcon
-          icon={faChevronLeft}
-          className="arrow"
-          onClick={() => dispatch(removeItemFromCart(cartItems, cartItem))}
-        />
-        <span className="value">{quantity}</span>
-        <FontAwesomeIcon
-          className="arrow"
-          icon={faChevronRight}
-          onClick={() => dispatch(addItemToCart(cartItems, cartItem))}
-        />
-      </QuantityColumn>
-      <Column>${price}</Column>
-      <Button
+      <DetailsContainer>
+        <Name>{name}</Name>
+        <div>${price}</div>
+        <QuantityColumn>
+          <FAIcon
+            icon={faChevronLeft}
+            className="arrow"
+            onClick={() => dispatch(removeItemFromCart(cartItems, cartItem))}
+          />
+          <QuantityControl>{quantity}</QuantityControl>
+          <FAIcon
+            className="arrow"
+            icon={faChevronRight}
+            onClick={() => dispatch(addItemToCart(cartItems, cartItem))}
+          />
+        </QuantityColumn>
+      </DetailsContainer>
+      <RemoveProductButton
         template={BUTTON_TYPE_CLASSES.link}
         onClick={() => dispatch(removeProductFromCart(cartItems, cartItem))}
       >
-        <FontAwesomeIcon icon={faTimes} />
-      </Button>
+        <FAIcon icon={faTimes} />
+      </RemoveProductButton>
     </CheckoutItemRow>
   );
 };
