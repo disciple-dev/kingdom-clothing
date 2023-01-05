@@ -6,6 +6,7 @@ import App from "./App";
 import { PersistGate } from "redux-persist/integration/react";
 import { Elements } from "@stripe/react-stripe-js";
 import { stripePromise } from "./services/stripe/stripe.utils";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 import { store, persistor } from "./store/configureStore";
 import reportWebVitals from "./reportWebVitals";
@@ -23,6 +24,8 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
+
+serviceWorkerRegistration.register();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
