@@ -17,5 +17,5 @@ export default defineConfig({
       "firebase/firestore",
     ],
   },
-  build: { outDir: "build", sourcemap: true },
+  build: { outDir: "build" },
 });
